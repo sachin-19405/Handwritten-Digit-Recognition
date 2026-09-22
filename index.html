@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Handwritten Digit Recognition</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>✍️ Handwritten Digit Recognition</h1>
+      <p class="subtitle">Draw a digit (0–9) below — powered by a neural network trained on 42,000 MNIST samples</p>
+    </header>
+
+    <div class="mode-tabs">
+      <button id="tabDraw" class="tab-btn active">Draw</button>
+      <button id="tabUpload" class="tab-btn">Upload image</button>
+    </div>
+
+    <main class="card">
+      <div id="drawPane" class="input-pane">
+        <div class="canvas-section">
+          <canvas id="canvas" width="280" height="280"></canvas>
+          <div class="btn-row">
+            <button id="clearBtn" class="btn btn-secondary">Clear</button>
+            <button id="predictBtn" class="btn btn-primary">Predict</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="uploadPane" class="input-pane hidden">
+        <div class="upload-section">
+          <label id="dropZone" for="fileInput" class="drop-zone">
+            <div id="uploadPreviewWrap" class="upload-preview-wrap hidden">
+              <img id="uploadPreview" alt="Selected image preview" />
+            </div>
+            <div id="dropZoneText" class="drop-zone-text">
+              <strong>Click to choose an image</strong>
+              <span>or drag &amp; drop &middot; PNG, JPG, WEBP &middot; up to 5&nbsp;MB</span>
+            </div>
+          </label>
+          <input type="file" id="fileInput" accept="image/png, image/jpeg, image/webp, image/bmp, image/gif" hidden />
+          <div class="btn-row">
+            <button id="uploadClearBtn" class="btn btn-secondary">Clear</button>
+            <button id="uploadPredictBtn" class="btn btn-primary" disabled>Predict</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-section">
+        <div id="resultBox" class="result-box empty">
+          <span class="placeholder">Draw a digit and click Predict</span>
+        </div>
+        <div id="topPreds" class="top-preds"></div>
+      </div>
+    </main>
+
+    <footer>
+      <p>Model: Multi-Layer Perceptron (256 → 128 → 10) &nbsp;•&nbsp; Test Accuracy ≈ 97.6%</p>
+    </footer>
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
